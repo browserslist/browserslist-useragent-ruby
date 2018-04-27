@@ -1,6 +1,6 @@
 module Browserslist
   module Useragent
-    class UserAgentResover
+    class UserAgentResolver
       attr_reader :user_agent_string
 
       def initialize(user_agent_string)
@@ -40,6 +40,8 @@ module Browserslist
         family = 'Firefox' if agent.family == 'Firefox Mobile'
         family = 'Explorer' if agent.family == 'IE'
         family = 'ExplorerMobile' if agent.family == 'IE Mobile'
+        family = 'QQAndroid' if agent.family == 'QQ Browser Mobile'
+        family = 'UCAndroid' if agent.family == 'UC Browser'
 
         UserAgent.new(family: family, version: version)
       end

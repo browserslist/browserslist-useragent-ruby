@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Browserslist::Useragent::UserAgentResover do
+RSpec.describe Browserslist::Useragent::UserAgentResolver do
   describe '#call' do
     def resolve_user_agent(user_agent)
       described_class.new(user_agent).call

@@ -13,11 +13,10 @@ module Browserslist
     NoVersionError = Class.new(StandardError)
 
    class << self
-      def match?(browsers:, useragent:)
-        browsers.each do |browser|
-          return true if AgentVersionMatcher.new(user_agent).call
-        end
-        false
+      def match?(browsers:, user_agent:)
+        ua = UserAgentResolver.new(user_agent).call
+        matcher = UserAgentMatcher.new(ua)
+        browsers.any? { |browser| matcher.call(browser) }
       end
     end
   end
