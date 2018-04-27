@@ -79,14 +79,14 @@ RSpec.describe Browserslist::Useragent::UserAgentResover do
         resolve_user_agent(
           'Mozilla/5.0 (Linux; Android 4.4.1; Pixel Build/Unknown;) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/44.0.0.0 Mobile Safari/537.36'
         )
-      ).to have_attributes(family: 'Chrome', version: '44.0.0.0')
+      ).to have_attributes(family: 'Chrome', version: '44.0.0')
 
       # chome mobile
       expect(
         resolve_user_agent(
           'Mozilla/5.0 (Linux; Android 6.0.0; Pixel Build/Unknown; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.0.0 Mobile Safari/537.36'
         )
-      ).to have_attributes(family: 'Chrome', version: '60.0.0.0')
+      ).to have_attributes(family: 'Chrome', version: '60.0.0')
     end
 
     it 'resolves firefox properly' do
