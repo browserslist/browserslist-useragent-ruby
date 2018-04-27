@@ -1,0 +1,9 @@
+Metrics/LineLength:
+  Exclude:
+    - 'spec/browserslist/user_agent_resolver_spec.rb'
+      
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/browserslist/useragent_spec.rb'
+    - 'spec/browserslist/user_agent_resolver_spec.rb'
+
