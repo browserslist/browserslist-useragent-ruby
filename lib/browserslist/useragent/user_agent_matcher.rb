@@ -16,7 +16,7 @@ module Browserslist
         and_qq: 'QQAndroid',
         and_uc: 'UCAndroid'
       }.freeze
- 
+
       attr_reader :user_agent
       def initialize(user_agent, options = {})
         @user_agent = user_agent
@@ -29,7 +29,7 @@ module Browserslist
         return false if normalized_name != user_agent.family
 
         normalized_version = version.split('-').first
-        ua_semantic =Semantic::Version.new(user_agent.version)
+        ua_semantic = Semantic::Version.new(user_agent.version)
         ua_semantic.satisfies?(normalized_version)
       end
 
