@@ -11,6 +11,7 @@ module Browserslist
   # Base module to match user agent and provied browserlists
   module Useragent
     NoVersionError = Class.new(StandardError)
+    NoBrowserError = Class.new(StandardError)
 
    class << self
       def match?(browsers:, user_agent:)
