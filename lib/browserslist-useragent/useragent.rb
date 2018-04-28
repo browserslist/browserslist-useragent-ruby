@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Browserslist
   # Base module to match user agent and provied browserlists
   module Useragent

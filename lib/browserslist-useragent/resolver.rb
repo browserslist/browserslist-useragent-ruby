@@ -1,5 +1,10 @@
+# frozen_string_literal: true
+
+# rubocop: disable Metrics/AbcSize, Metrics/CyclomaticComplexity
+# rubocop: disable Metrics/MethodLength, Metrics/PerceivedComplexity
 module Browserslist
   module Useragent
+    # Resolves uaser agent string to {family, version} hash
     class Resolver
       attr_reader :user_agent_string
 
@@ -48,3 +53,5 @@ module Browserslist
     end
   end
 end
+# rubocop: enable Metrics/AbcSize, Metrics/CyclomaticComplexity
+# rubocop: enable Metrics/MethodLength, Metrics/PerceivedComplexity

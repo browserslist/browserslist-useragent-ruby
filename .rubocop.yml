@@ -1,9 +1,16 @@
-Metrics/LineLength:
+AllCops:
   Exclude:
-    - 'spec/browserslist/user_agent_resolver_spec.rb'
+    - '*.gemspec'
+  DisplayCopNames: true
+  StyleGuideCopsOnly: false
+  TargetRubyVersion: 2.3
+
+Metrics/LineLength:
+  Max: 110
+  Exclude:
+    - 'spec/**/*'
       
 Metrics/BlockLength:
   Exclude:
-    - 'spec/browserslist/useragent_spec.rb'
-    - 'spec/browserslist/user_agent_resolver_spec.rb'
+    - 'spec/**/*'
 

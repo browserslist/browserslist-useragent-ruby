@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Browserslist
   module Useragent
+    # Normalizes browserslist query to existing browser family names
     class QueryNormalizer
       NORMALIZED_NAMES = {
         bb: 'BlackBerry',

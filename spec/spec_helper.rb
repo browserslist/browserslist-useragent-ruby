@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'bundler/setup'
 require 'byebug'
 
-require 'browserslist-useragent'
+require 'browserslist_useragent'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

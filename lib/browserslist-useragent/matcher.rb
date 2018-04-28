@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'semantic'
 
 module Browserslist
@@ -16,25 +18,15 @@ module Browserslist
       def match?
         agent = resolver.call
         queries.any? do |query|
-          if match_user_agent?(agent[:family], query[:family])
-            ua_semantic = Semantic::Version.new(agent[:version])
-
-            query_version = query[:version]
-            if query_version.include?('-')
-              low_version, hight_version = query_version.split('-', 2)
-              ua_semantic.satisfies?(">= #{low_version}") &&
-                ua_semantic.satisfies?("<= #{hight_version}")
-            else
-              ua_semantic.satisfies?(query[:version])
-            end
-          end
+          match_user_agent_family?(agent[:family], query[:family]) &&
+            match_user_agent_version?(agent[:version], query[:version])
         end
       end
 
       def family?
         agent = resolver.call
         queries.any? do |query|
-          match_user_agent?(agent[:family], query[:family])
+          match_user_agent_family?(agent[:family], query[:family])
         end
       end
 
@@ -44,8 +36,20 @@ module Browserslist
         @resolver ||= Resolver.new(user_agent)
       end
 
-      def match_user_agent?(a, b)
-        a.casecmp(b).zero?
+      def match_user_agent_version?(user_agent_version, query_browser_version)
+        semantic = Semantic::Version.new(user_agent_version)
+
+        if query_browser_version.include?('-')
+          low_version, hight_version = query_browser_version.split('-', 2)
+          semantic.satisfies?(">= #{low_version}") &&
+            semantic.satisfies?("<= #{hight_version}")
+        else
+          semantic.satisfies?(query_browser_version)
+        end
+      end
+
+      def match_user_agent_family?(user_agent_family, query_browser_family)
+        user_agent_family.casecmp(query_browser_family).zero?
       end
     end
   end
