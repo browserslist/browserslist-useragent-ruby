@@ -20,7 +20,7 @@ It is used in
 
 It provides 2 methods:
  - `match?` - determines matching browser and its version
- - `family?` - determines matching only borwser family:
+ - `browser_match?` - determines matching only borwser family:
 
 ```ruby
 require 'browserslist_useragent'
@@ -29,14 +29,14 @@ matcher = BrowserslistUseragent::Matcher.new(
   ['Firefox 53'],
   'Mozilla/5.0 (Windows NT 10.0; rv:54.0) Gecko/20100101 Firefox/53.0'
 )
-matcher.family? # returns true
+matcher.browser_match? # returns true
 matcher.match? # return true
 
 matcher = BrowserslistUseragent::Matcher.new(
   ['Firefox 54'],
   'Mozilla/5.0 (Windows NT 10.0; rv:54.0) Gecko/20100101 Firefox/53.0'
 )
-matcher.family? # returns true
+matcher.browser_match? # returns true
 matcher.match? # return false
 ```
 
@@ -63,7 +63,7 @@ MODERN_BROWSERS = [
 ]
 
 matcher = BrowserslistUseragent::Matcher.new(MODERN_BROWSERS, request.user_agent)
-if matcher.family?
+if matcher.browser_match?
   if matcher.match?
     # browser if modern and supported
   else

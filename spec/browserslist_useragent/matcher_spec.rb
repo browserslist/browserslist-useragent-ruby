@@ -18,25 +18,25 @@ RSpec.describe BrowserslistUseragent::Matcher do
     )
   end
 
-  describe '#family?' do
+  describe '#browser_match?' do
     context 'when family is iOS' do
       let(:user_agent) { { family: 'iOS' } }
-      it { expect(matcher.family?).to be_truthy }
+      it { expect(matcher.browser_match?).to be_truthy }
     end
 
     context 'when family is Explorer' do
       let(:user_agent) { { family: 'Explorer' } }
-      it { expect(matcher.family?).to be_truthy }
+      it { expect(matcher.browser_match?).to be_truthy }
     end
 
     context 'when family is Chrome' do
       let(:user_agent) { { family: 'Chrome' } }
-      it { expect(matcher.family?).to be_truthy }
+      it { expect(matcher.browser_match?).to be_truthy }
     end
 
     context 'when family is BlackBerry' do
       let(:user_agent) { { family: 'BlackBerry' } }
-      it { expect(matcher.family?).to be_falsey }
+      it { expect(matcher.browser_match?).to be_falsey }
     end
   end
 

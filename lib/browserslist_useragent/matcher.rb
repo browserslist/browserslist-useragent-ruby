@@ -22,7 +22,7 @@ module BrowserslistUseragent
       end
     end
 
-    def family?
+    def browser_match?
       agent = resolver.call
       queries.any? do |query|
         match_user_agent_family?(agent[:family], query[:family])
