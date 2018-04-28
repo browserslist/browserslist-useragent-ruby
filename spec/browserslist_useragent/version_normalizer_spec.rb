@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Browserslist::Useragent::VersionNormalizer do
+RSpec.describe BrowserslistUseragent::VersionNormalizer do
   describe '#call' do
     let(:subject) { described_class.new(version).call }
 

@@ -1,11 +1,11 @@
 
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'browserslist-useragent/version'
+require 'browserslist_useragent/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'browserslist-useragent-ruby'
-  spec.version       = Browserslist::Useragent::VERSION
+  spec.name          = 'browserslist_useragent'
+  spec.version       = BrowserslistUseragent::VERSION
   spec.authors       = ['Salahutdinov Dmitry']
   spec.email         = ['dsalahutdinov@gmail.com']
 

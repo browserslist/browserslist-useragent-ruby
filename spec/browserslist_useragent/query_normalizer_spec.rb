@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Browserslist::Useragent::QueryNormalizer do
+RSpec.describe BrowserslistUseragent::QueryNormalizer do
   describe '#call' do
     let(:subject) { described_class.new(query).call }
 

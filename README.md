@@ -11,35 +11,74 @@ It is used in
 [babel-preset-env](https://github.com/babel/babel/tree/master/packages/babel-preset-env),
 [postcss-preset-env](https://github.com/jonathantneal/postcss-preset-env) and many other tools.
 
+## Gem usage
+
+`BrowsersList::Useragent::Matcher` - is the main class performing matching user agent string to browserslist.
+
+It provides 2 methods:
+ - `match?` - determines matching browser and its version
+ - `family?` - determines matching only borwser family:
+
+```ruby
+require 'browserslist_useragent'
+
+matcher␣=␣BrowsersList::Useragent::Matcher.new(
+  ['Firefox 53'],
+  'Mozilla/5.0 (Windows NT 10.0; rv:54.0) Gecko/20100101 Firefox/53.0'
+)
+matcher.family? # returns true
+matcher.match? # return true
+
+matcher␣=␣BrowsersList::Useragent::Matcher.new(
+  ['Firefox 54'],
+  'Mozilla/5.0 (Windows NT 10.0; rv:54.0) Gecko/20100101 Firefox/53.0'
+)
+matcher.family? # returns true
+matcher.match? # return false
+```
+### Use case to determine 'unsupported browers'
+```ruby
+SUPPORTED_BROWSERS = [
+  'chrome 64', 'chrome 65', 'firefox 58', 'opera 50', 'safari 11'
+]
+
+matcher = BrowsersList::Useragent::Matcher.new(SUPPORTED_BROWSERS, request.user_agent)
+if matcher.match?
+  # browser version is supported
+else
+  # browser version is unsupported
+end
+`
+```
+
+### Use case to determine 'obsolete browsers'
+```ruby
+MODERN_BROWSERS = [
+  'chrome 64', 'chrome 65', 'firefox 58', 'opera 50', 'safari 11'
+]
+
+matcher = BrowsersList::Useragent::Matcher.new(MODERN_BROWSERS, request.user_agent)
+if matcher.family?
+  if matcher.match?
+    # browser if modern and supported
+  else
+    # broser is obsolete
+  end
+else
+  # browser type in not in the browserslist, we are not able to suppose anyting
+end
+```
+
 ## Installation
 
 ```ruby
 # add to your Gemfile
-gem 'browserslist-useragent-ruby'
+gem 'browserslist_useragent'
 
+# than run
 bundle install
 ```
 
-## Usage
-
-```ruby
-require 'browserslist-useragent-ruby'
-
-Browserslist::Useragent.match?(
-  user_agent: request.user_agent,
-  browsers: [
-    'ff 55', 'chorome > 60', 'Firefox > 53'
-  ]
-)
-
-# example
-Browserslist::Useragent.match?(
-  user_agent: 'Mozilla/5.0 (Windows NT 10.0; rv:54.0) Gecko/20100101 Firefox/54.0',
-  browsers: ['Firefox > 53']
-)
-# returns true
-
-```
 ## Supported browsers
 
 Chrome, Firefox, Safari, IE, Edge

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Browserslist::Useragent::Matcher do
+RSpec.describe BrowserslistUseragent::Matcher do
   let(:matcher) { described_class.new(queries, 'user agent') }
   let(:queries) do
     [
