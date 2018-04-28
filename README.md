@@ -1,19 +1,22 @@
-# browserslist-useragent-ruby gem [![Build Status](https://travis-ci.org/dsalahutdinov/browserslist-useragent.svg?branch=master)](https://travis-ci.org/dsalahutdinov/browserslist-useragent)
+# browserslist_useragent ruby gem [![Build Status](https://travis-ci.org/dsalahutdinov/browserslist-useragent.svg?branch=master)](https://travis-ci.org/dsalahutdinov/browserslist-useragent)
 
 <img align="right" width="120" height="120"
      src="https://github.com/browserslist/browserslist/blob/master/logo.svg" alt="Browserslist logo by Anton Lovchikov">
 
-Find if a given user agent string satisfies a [browserslist](https://github.com/ai/browserslist) query and allows you to track outdating browsers on backend in easy way.
+Find if a given user agent string satisfies a [browserslist](https://github.com/ai/browserslist) query.
 
-[browserslist](https://github.com/ai/browserslist) - Library to share target browsers between different front-end tools.
+Make browser version control easy at both front-end and back-end, share one config with modern front-end tools.
+
+[Browserslist](https://github.com/ai/browserslist) - Library to share target browsers between different front-end tools.
 It is used in
 [Autoprefixer](https://github.com/postcss/autoprefixer),
 [babel-preset-env](https://github.com/babel/babel/tree/master/packages/babel-preset-env),
 [postcss-preset-env](https://github.com/jonathantneal/postcss-preset-env) and many other tools.
 
+
 ## Gem usage
 
-`BrowsersList::Useragent::Matcher` - is the main class performing matching user agent string to browserslist.
+`BrowserslistUseragent::Matcher` - is the main class performing matching user agent string to browserslist.
 
 It provides 2 methods:
  - `match?` - determines matching browser and its version
@@ -22,42 +25,44 @@ It provides 2 methods:
 ```ruby
 require 'browserslist_useragent'
 
-matcher␣=␣BrowsersList::Useragent::Matcher.new(
+matcher = BrowserslistUseragent::Matcher.new(
   ['Firefox 53'],
   'Mozilla/5.0 (Windows NT 10.0; rv:54.0) Gecko/20100101 Firefox/53.0'
 )
 matcher.family? # returns true
 matcher.match? # return true
 
-matcher␣=␣BrowsersList::Useragent::Matcher.new(
+matcher = BrowserslistUseragent::Matcher.new(
   ['Firefox 54'],
   'Mozilla/5.0 (Windows NT 10.0; rv:54.0) Gecko/20100101 Firefox/53.0'
 )
 matcher.family? # returns true
 matcher.match? # return false
 ```
-### Use case to determine 'unsupported browers'
+
+### Use case "Unsupported Browser" detection
+
 ```ruby
 SUPPORTED_BROWSERS = [
   'chrome 64', 'chrome 65', 'firefox 58', 'opera 50', 'safari 11'
 ]
 
-matcher = BrowsersList::Useragent::Matcher.new(SUPPORTED_BROWSERS, request.user_agent)
+matcher = BrowserslistUseragent::Matcher.new(SUPPORTED_BROWSERS, request.user_agent)
 if matcher.match?
   # browser version is supported
 else
   # browser version is unsupported
 end
-`
 ```
 
-### Use case to determine 'obsolete browsers'
+### Use case "Obsolete Browser" detection
+
 ```ruby
 MODERN_BROWSERS = [
   'chrome 64', 'chrome 65', 'firefox 58', 'opera 50', 'safari 11'
 ]
 
-matcher = BrowsersList::Useragent::Matcher.new(MODERN_BROWSERS, request.user_agent)
+matcher = BrowserslistUseragent::Matcher.new(MODERN_BROWSERS, request.user_agent)
 if matcher.family?
   if matcher.match?
     # browser if modern and supported
@@ -65,7 +70,7 @@ if matcher.family?
     # broser is obsolete
   end
 else
-  # browser type in not in the browserslist, we are not able to suppose anyting
+  # browser type in not in the browserslist, we are not able to suppose it's version obsolete
 end
 ```
 
