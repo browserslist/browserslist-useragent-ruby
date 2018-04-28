@@ -1,6 +1,7 @@
 require 'bundler/setup'
-require 'browserslist/useragent'
 require 'byebug'
+
+require 'browserslist-useragent'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

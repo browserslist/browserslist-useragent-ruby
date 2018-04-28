@@ -1,4 +1,4 @@
-# BrowserslistUseragent [![Build Status](https://travis-ci.org/dsalahutdinov/browserslist-useragent.svg?branch=master)](https://travis-ci.org/dsalahutdinov/browserslist-useragent)
+# browserslist-useragent-ruby gem [![Build Status](https://travis-ci.org/dsalahutdinov/browserslist-useragent.svg?branch=master)](https://travis-ci.org/dsalahutdinov/browserslist-useragent)
 
 <img align="right" width="120" height="120"
      src="https://github.com/browserslist/browserslist/blob/master/logo.svg" alt="Browserslist logo by Anton Lovchikov">
@@ -14,12 +14,17 @@ It is used in
 ## Installation
 
 ```ruby
-gem 'browserslist-useragent'
+# add to your Gemfile
+gem 'browserslist-useragent-ruby'
+
+bundle install
 ```
 
 ## Usage
 
 ```ruby
+require 'browserslist-useragent-ruby'
+
 Browserslist::Useragent.match?(
   user_agent: request.user_agent,
   browsers: [

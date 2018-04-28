@@ -1,6 +1,6 @@
 module Browserslist
   module Useragent
-    class UserAgentResolver
+    class Resolver
       attr_reader :user_agent_string
 
       def initialize(user_agent_string)
@@ -12,7 +12,7 @@ module Browserslist
         raise NoVersionError, 'Version' if agent.version.nil?
 
         family = agent.family
-        version = VersionBuilder.new(agent.version.to_s).call
+        version = VersionNormalizer.new(agent.version.to_s).call
 
         # Case A: For Safari, Chrome and others browsers
         # that report as Safari after stripping tags
@@ -24,10 +24,10 @@ module Browserslist
         # underlying Safari Engine used will be *atleast* equal
         # to the iOS version it's running on.
         if agent.os.family == 'iOS'
-          return UserAgent.new(
+          return {
             family: 'iOS',
-            version: VersionBuilder.new(agent.os.version.to_s).call
-          )
+            version: VersionNormalizer.new(agent.os.version.to_s).call
+          }
         end
 
         # Case C: The caniuse database does not contain
@@ -43,7 +43,7 @@ module Browserslist
         family = 'QQAndroid' if agent.family == 'QQ Browser Mobile'
         family = 'UCAndroid' if agent.family == 'UC Browser'
 
-        UserAgent.new(family: family, version: version)
+        { family: family, version: version }
       end
     end
   end
