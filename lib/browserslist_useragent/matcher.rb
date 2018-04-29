@@ -9,24 +9,29 @@ module BrowserslistUseragent
 
     def initialize(queries, user_agent)
       @user_agent = user_agent
-      @queries = queries.each_with_object([]) do |query, arr|
-        arr.push(::BrowserslistUseragent::QueryNormalizer.new(query).call)
+      @queries = queries.each_with_object({}) do |query, hash|
+        query = BrowserslistUseragent::QueryNormalizer.new(query).call
+        family = query[:family].downcase
+        hash[family] ||= []
+        hash[family].push(query[:version])
       end
     end
 
     def version?
       agent = resolver.call
-      queries.any? do |query|
-        match_user_agent_family?(agent[:family], query[:family]) &&
-          match_user_agent_version?(agent[:version], query[:version])
+      return false unless browser?
+
+      target_browser = agent[:family].downcase
+
+      queries[target_browser].any? do |version|
+        match_user_agent_version?(agent[:version], version)
       end
     end
 
     def browser?
       agent = resolver.call
-      queries.any? do |query|
-        match_user_agent_family?(agent[:family], query[:family])
-      end
+      target_browser = agent[:family].downcase
+      queries.key?(target_browser)
     end
 
     private
@@ -45,10 +50,6 @@ module BrowserslistUseragent
       else
         semantic.satisfies?(query_browser_version)
       end
-    end
-
-    def match_user_agent_family?(user_agent_family, query_browser_family)
-      user_agent_family.casecmp(query_browser_family).zero?
     end
   end
 end
