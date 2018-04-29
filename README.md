@@ -16,7 +16,7 @@ It is used in
 
 ## Gem usage
 
-`BrowserslistUseragent::Matcher` - is the main class performing matching user agent string to browserslist.
+`BrowserslistUseragent::Match` - is the main class performing matching user agent string to browserslist.
 
 It provides 2 methods:
  - `version?` - determines matching browser and its version
@@ -25,14 +25,14 @@ It provides 2 methods:
 ```ruby
 require 'browserslist_useragent'
 
-matcher = BrowserslistUseragent::Matcher.new(
+matcher = BrowserslistUseragent::Match.new(
   ['Firefox 53'],
   'Mozilla/5.0 (Windows NT 10.0; rv:54.0) Gecko/20100101 Firefox/53.0'
 )
 matcher.browser? # returns true
 matcher.version? # return true
 
-matcher = BrowserslistUseragent::Matcher.new(
+matcher = BrowserslistUseragent::Match.new(
   ['Firefox 54'],
   'Mozilla/5.0 (Windows NT 10.0; rv:54.0) Gecko/20100101 Firefox/53.0'
 )
@@ -47,11 +47,8 @@ SUPPORTED_BROWSERS = [
   'chrome 64', 'chrome 65', 'firefox 58', 'opera 50', 'safari 11'
 ]
 
-matcher = BrowserslistUseragent::Matcher.new(SUPPORTED_BROWSERS, request.user_agent)
-if matcher.version?
-  # browser version is supported
-else
-  # browser version is unsupported
+def supported_browser?(user_agent)
+  BrowserslistUseragent::Match.new(SUPPORTED_BROWSERS, user_agent).version?
 end
 ```
 
@@ -62,15 +59,9 @@ MODERN_BROWSERS = [
   'chrome 64', 'chrome 65', 'firefox 58', 'opera 50', 'safari 11'
 ]
 
-matcher = BrowserslistUseragent::Matcher.new(MODERN_BROWSERS, request.user_agent)
-if matcher.browser?
-  if matcher.version?
-    # browser if modern and supported
-  else
-    # broser is obsolete
-  end
-else
-  # browser type in not in the browserslist, we are not able to suppose it's version obsolete
+def obsolete_browser?(user_agent)
+  match = BrowserslistUseragent::Matcher.new(MODERN_BROWSERS, request.user_agent)
+  match.browser? && match.version?
 end
 ```
 

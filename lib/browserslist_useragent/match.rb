@@ -4,7 +4,7 @@ require 'semantic'
 
 module BrowserslistUseragent
   # Checks matching of browserslist queies array to the user agent string
-  class Matcher
+  class Match
     attr_reader :queries, :user_agent
 
     def initialize(queries, user_agent)

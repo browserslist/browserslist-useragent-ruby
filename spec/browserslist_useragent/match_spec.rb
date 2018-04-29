@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe BrowserslistUseragent::Matcher do
+RSpec.describe BrowserslistUseragent::Match do
   let(:matcher) { described_class.new(queries, 'user agent') }
   let(:queries) do
     [
