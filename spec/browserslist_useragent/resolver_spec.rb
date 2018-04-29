@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe BrowserslistUseragent::Resolver do
   describe '#call' do
     def resolve_user_agent(user_agent)

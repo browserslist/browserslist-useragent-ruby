@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe BrowserslistUseragent::VersionNormalizer do
   describe '#call' do
     let(:subject) { described_class.new(version).call }

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe BrowserslistUseragent::QueryNormalizer do
   describe '#call' do
     let(:subject) { described_class.new(query).call }
