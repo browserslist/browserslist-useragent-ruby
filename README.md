@@ -19,8 +19,8 @@ It is used in
 `BrowserslistUseragent::Matcher` - is the main class performing matching user agent string to browserslist.
 
 It provides 2 methods:
- - `match?` - determines matching browser and its version
- - `browser_match?` - determines matching only borwser family:
+ - `version?` - determines matching browser and its version
+ - `browser?` - determines matching only borwser family:
 
 ```ruby
 require 'browserslist_useragent'
@@ -29,15 +29,15 @@ matcher = BrowserslistUseragent::Matcher.new(
   ['Firefox 53'],
   'Mozilla/5.0 (Windows NT 10.0; rv:54.0) Gecko/20100101 Firefox/53.0'
 )
-matcher.browser_match? # returns true
-matcher.match? # return true
+matcher.browser? # returns true
+matcher.version? # return true
 
 matcher = BrowserslistUseragent::Matcher.new(
   ['Firefox 54'],
   'Mozilla/5.0 (Windows NT 10.0; rv:54.0) Gecko/20100101 Firefox/53.0'
 )
-matcher.browser_match? # returns true
-matcher.match? # return false
+matcher.browser? # returns true
+matcher.version? # return false
 ```
 
 ### Use case "Unsupported Browser" detection
@@ -48,7 +48,7 @@ SUPPORTED_BROWSERS = [
 ]
 
 matcher = BrowserslistUseragent::Matcher.new(SUPPORTED_BROWSERS, request.user_agent)
-if matcher.match?
+if matcher.version?
   # browser version is supported
 else
   # browser version is unsupported
@@ -63,8 +63,8 @@ MODERN_BROWSERS = [
 ]
 
 matcher = BrowserslistUseragent::Matcher.new(MODERN_BROWSERS, request.user_agent)
-if matcher.browser_match?
-  if matcher.match?
+if matcher.browser?
+  if matcher.version?
     # browser if modern and supported
   else
     # broser is obsolete
