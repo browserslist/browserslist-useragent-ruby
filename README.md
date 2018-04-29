@@ -52,15 +52,15 @@ def supported_browser?(user_agent)
 end
 ```
 
-### Use case "Obsolete Browser" detection
+### Use case "Outdated Browser" detection
 
 ```ruby
 MODERN_BROWSERS = [
   'chrome 64', 'chrome 65', 'firefox 58', 'opera 50', 'safari 11'
 ]
 
-def obsolete_browser?(user_agent)
-  match = BrowserslistUseragent::Matcher.new(MODERN_BROWSERS, request.user_agent)
+def outdated_browser?(user_agent)
+  match = BrowserslistUseragent::Matcher.new(MODERN_BROWSERS, user_agent)
   match.browser? && match.version?(allow_higher: true)
 end
 ```
