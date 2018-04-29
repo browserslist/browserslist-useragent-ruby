@@ -10,11 +10,7 @@ RSpec.describe BrowserslistUseragent::Match do
     ]
   end
 
-  before do
-    allow(matcher).to receive(:resolver).and_return(
-      double(call: user_agent)
-    )
-  end
+  before { allow(matcher).to receive(:user_agent).and_return(user_agent) }
 
   describe '#browser?' do
     context 'when family is iOS' do
@@ -124,6 +120,20 @@ RSpec.describe BrowserslistUseragent::Match do
         let(:user_agent) { { family: 'android', version: '5.0.0' } }
 
         it { expect(matcher).not_to be_version }
+      end
+    end
+
+    context 'when allow higher option is set' do
+      context 'when major version is greater' do
+        let(:user_agent) { { family: 'Firefox', version: '60.0.0' } }
+
+        it { expect(matcher.version?(allow_higher: true)).to be_truthy }
+      end
+
+      context 'when major version is greater' do
+        let(:user_agent) { { family: 'android', version: '5.0.0' } }
+
+        it { expect(matcher.version?(allow_higher: true)).to be_truthy }
       end
     end
   end

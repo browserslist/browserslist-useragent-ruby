@@ -19,7 +19,7 @@ It is used in
 `BrowserslistUseragent::Match` - is the main class performing matching user agent string to browserslist.
 
 It provides 2 methods:
- - `version?` - determines matching browser and its version
+ - `version?(allow_higher: false)` - determines matching browser and its version
  - `browser?` - determines matching only borwser family:
 
 ```ruby
@@ -61,7 +61,7 @@ MODERN_BROWSERS = [
 
 def obsolete_browser?(user_agent)
   match = BrowserslistUseragent::Matcher.new(MODERN_BROWSERS, request.user_agent)
-  match.browser? && match.version?
+  match.browser? && match.version?(allow_higher: true)
 end
 ```
 

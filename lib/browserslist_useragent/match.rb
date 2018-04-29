@@ -5,10 +5,10 @@ require 'semantic'
 module BrowserslistUseragent
   # Checks matching of browserslist queies array to the user agent string
   class Match
-    attr_reader :queries, :user_agent
+    attr_reader :queries, :user_agent_string
 
-    def initialize(queries, user_agent)
-      @user_agent = user_agent
+    def initialize(queries, user_agent_string)
+      @user_agent_string = user_agent_string
       @queries = queries.each_with_object({}) do |query, hash|
         query = BrowserslistUseragent::QueryNormalizer.new(query).call
         family = query[:family].downcase
@@ -17,39 +17,42 @@ module BrowserslistUseragent
       end
     end
 
-    def version?
-      agent = resolver.call
+    def version?(allow_higher: false)
       return false unless browser?
 
-      target_browser = agent[:family].downcase
-
-      queries[target_browser].any? do |version|
-        match_user_agent_version?(agent[:version], version)
+      semantic = Semantic::Version.new(user_agent[:version])
+      queries[user_agent[:family].downcase].any? do |version|
+        if allow_higher
+          match_higher_version?(semantic, version)
+        else
+          match_version?(semantic, version)
+        end
       end
     end
 
     def browser?
-      agent = resolver.call
-      target_browser = agent[:family].downcase
+      target_browser = user_agent[:family].downcase
       queries.key?(target_browser)
     end
 
     private
 
-    def resolver
-      @resolver ||= Resolver.new(user_agent)
+    def user_agent
+      Resolver.new(user_agent_string).call
     end
 
-    def match_user_agent_version?(user_agent_version, query_browser_version)
-      semantic = Semantic::Version.new(user_agent_version)
-
-      if query_browser_version.include?('-')
-        low_version, hight_version = query_browser_version.split('-', 2)
-        semantic.satisfies?(">= #{low_version}") &&
-          semantic.satisfies?("<= #{hight_version}")
+    def match_version?(semantic, query_version)
+      if query_version.include?('-')
+        low_version, high_version = query_version.split('-', 2)
+        semantic.satisfied_by?([">= #{low_version}", "<= #{high_version}"])
       else
-        semantic.satisfies?(query_browser_version)
+        semantic.satisfies?(query_version)
       end
+    end
+
+    def match_higher_version?(semantic, query_version)
+      low_version = query_version.split('-', 2).first
+      semantic.satisfies?(">= #{low_version}")
     end
   end
 end
