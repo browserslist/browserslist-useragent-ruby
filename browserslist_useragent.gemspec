@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['dsalahutdinov@gmail.com']
 
   spec.summary       = 'Find if a given user agent string satisfies a browserslist query.'
-  spec.description   = 'Gem provides easy way to match browser user agent string with specified set of rules (from browserslist tool)'
+  spec.description   = 'Provides easy way to match browser user agent string with specified set of rules (from browserslist tool)'
   spec.homepage      = 'https://github.com/dsalahutdinov/browserlist-useragent-ruby'
   spec.license       = 'MIT'
 
