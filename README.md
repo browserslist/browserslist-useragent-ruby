@@ -5,7 +5,7 @@
 
 Find if a given user agent string satisfies a [browserslist](https://github.com/ai/browserslist) query.
 
-Make browser version control easy at both front-end and back-end, share one config with modern front-end tools.
+Make browser version control easy at both front-end and back-end, [share one config with modern front-end tools](#advanced-mode).
 
 [Browserslist](https://github.com/ai/browserslist) - Library to share target browsers between different front-end tools.
 It is used in
@@ -14,12 +14,41 @@ It is used in
 [postcss-preset-env](https://github.com/jonathantneal/postcss-preset-env) and many other tools.
 
 
-## Gem usage
+## Use gem with browserslist tool
 
+### Setup browserslist
+
+Run in webpack directory to install `browserslist` npm package:
+
+```sh
+npm install --save-dev browserslist
+```
+
+Put this lines of code to `webpack/config.js` to generate `browsers.json` automatically:
+
+```javascript
+const browserslist = require('browserslist')
+const fs = require('fs')
+
+fs.writeFileSync('./browsers.json', JSON.stringify(browserslist()))
+```
+
+Read more details about browserslist [here](https://github.com/browserslist/browserslist#browserslist-).
+
+### Use gem to find if user_agent satisfies provided browserslist
+Read json file and pass it to gem (with user_agent):
+
+```ruby
+# read generates browserslist
+browsers = JSON.parse(File.read('browsers.json'))
+BrowserslistUseragent::Match.new(browsers, request.user_agent).version?
+```
+
+## Gem usage
 `BrowserslistUseragent::Match` - is the main class performing matching user agent string to browserslist.
 
 It provides 2 methods:
- - `version?(allow_higher: false)` - determines matching browser and its version
+ - `version?(allow_higher: false)` - determines matching browser and it's version
  - `browser?` - determines matching only borwser family:
 
 ```ruby
@@ -65,7 +94,37 @@ def outdated_browser?(user_agent)
 end
 ```
 
-## Installation
+## Advanced mode
+
+If you have ruby backend and nodejs frontend working separately, maybe you will prefer to share one 
+browserslist over http.
+
+Share `browsers.json` file moving it to `public` directory:
+
+```javascript
+fs.writeFileSync(
+  path.join(__dirname, '..', 'public', 'browsers.json'),
+  JSON.stringify(browserslist(undefined, { path: path.join(__dirname, '..') }))
+)
+```
+Do not forget to put file to `.gitignore`.
+
+Gets `browserslist.json` over http (with caching) once (per web application instance) and use it to match user_agent for every request:
+```ruby
+# caches http response locally with etag
+http_client = Faraday.new do |builder|
+  builder.use Faraday::HttpCache, store: Rails.cache
+  builder.adapter Faraday.default_adapter
+end
+@browsers = JSON.parse(
+  http_client.get(FRONTEND_HOST + '/browsers.json').body
+)
+# somewhere in request processing
+matcher = BrowserslistUseragent::Match.new(@browsers, user_agent)
+modern_browser = matcher.browser? && matcher.version?
+```
+
+## Gem installation
 
 ```ruby
 # add to your Gemfile
