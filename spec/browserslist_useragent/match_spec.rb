@@ -39,6 +39,12 @@ RSpec.describe BrowserslistUseragent::Match do
   end
 
   describe '#version?' do
+    context 'when version is nil' do
+      let(:user_agent) { { family: 'Chrome', version: '' } }
+
+      it { expect(matcher.version?).to be_falsey }
+    end
+
     context 'when rule has single version with major only' do
       context 'when version fully matches with version in rule' do
         let(:user_agent) { { family: 'Chrome', version: '65.0.0' } }

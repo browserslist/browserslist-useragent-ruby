@@ -13,7 +13,6 @@ module BrowserslistUseragent
 
     def call
       agent = UserAgentParser.parse(user_agent_string)
-      raise NoVersionError, 'Version' if agent.version.nil?
 
       family = agent.family
       version = VersionNormalizer.new(agent.version.to_s).call

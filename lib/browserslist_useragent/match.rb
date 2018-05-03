@@ -20,14 +20,11 @@ module BrowserslistUseragent
     def version?(allow_higher: false)
       return false unless browser?
 
+      user_agent_version = user_agent[:version]
+      return false if user_agent_version.nil? || user_agent_version == ''
+
       semantic = Semantic::Version.new(user_agent[:version])
-      queries[user_agent[:family].downcase].any? do |version|
-        if allow_higher
-          match_higher_version?(semantic, version)
-        else
-          match_version?(semantic, version)
-        end
-      end
+      match_semantic_version(semantic, allow_higher: allow_higher)
     end
 
     def browser?
@@ -39,6 +36,16 @@ module BrowserslistUseragent
 
     def user_agent
       Resolver.new(user_agent_string).call
+    end
+
+    def match_semantic_version(semantic, allow_higher:)
+      queries[user_agent[:family].downcase].any? do |version|
+        if allow_higher
+          match_higher_version?(semantic, version)
+        else
+          match_version?(semantic, version)
+        end
+      end
     end
 
     def match_version?(semantic, query_version)

@@ -13,6 +13,8 @@ module BrowserslistUseragent
 
     def call
       agent_version = ::UserAgentParser::Version.new(version)
+      return nil if agent_version.major.nil?
+
       [
         agent_version.major,
         agent_version.minor || 0,
