@@ -1,4 +1,4 @@
-# browserslist_useragent gem [![Build Status](https://travis-ci.org/dsalahutdinov/browserslist-useragent.svg?branch=master)](https://travis-ci.org/dsalahutdinov/browserslist-useragent)
+# browserslist_useragent gem [![Build Status](https://travis-ci.org/browserslist/browserslist-useragent-ruby.svg?branch=master)](https://travis-ci.org/browserslist/browserslist-useragent-ruby)
 
 <img align="right" width="120" height="120"
      src="https://github.com/browserslist/browserslist/blob/master/logo.svg" alt="Browserslist logo by Anton Lovchikov">
@@ -130,7 +130,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/browserslist-useragent.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/browserslist-useragent-ruby.
 
 ## License
 
