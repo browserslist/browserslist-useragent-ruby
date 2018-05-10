@@ -1,4 +1,7 @@
-# browserslist_useragent gem [![Build Status](https://travis-ci.org/browserslist/browserslist-useragent-ruby.svg?branch=master)](https://travis-ci.org/browserslist/browserslist-useragent-ruby)
+# browserslist_useragent gem
+[![Gem Version](https://badge.fury.io/rb/browserslist_useragent.svg)](https://badge.fury.io/rb/browserslist_useragent)
+[![Build Status](https://travis-ci.org/browserslist/browserslist-useragent-ruby.svg?branch=master)](https://travis-ci.org/browserslist/browserslist-useragent-ruby)
+
 
 <img align="right" width="120" height="120"
      src="https://github.com/browserslist/browserslist/blob/master/logo.svg" alt="Browserslist logo by Anton Lovchikov">
