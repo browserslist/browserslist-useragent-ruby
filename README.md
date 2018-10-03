@@ -2,9 +2,8 @@
 [![Gem Version](https://badge.fury.io/rb/browserslist_useragent.svg)](https://badge.fury.io/rb/browserslist_useragent)
 [![Build Status](https://travis-ci.org/browserslist/browserslist-useragent-ruby.svg?branch=master)](https://travis-ci.org/browserslist/browserslist-useragent-ruby)
 
-
 <img align="right" width="120" height="120"
-     src="https://github.com/browserslist/browserslist/blob/master/logo.svg" alt="Browserslist logo by Anton Lovchikov">
+  src="https://cdn.rawgit.com/pastelsky/browserslist-useragent/master/logo.svg" alt="Browserslist Useragent logo (original by Anton Lovchikov)" />
 
 Find if a given user agent string satisfies a [Browserslist](https://github.com/ai/browserslist) browsers.
 
