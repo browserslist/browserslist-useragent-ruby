@@ -45,21 +45,21 @@ Run `bundle install`.
 Define new helper in `app/helpers/application_helper.rb`:
 
 ```ruby
-def outdated_browser?
+def supported_browser?
   @browsers ||= JSON.parse(File.read(PATH_TO_BROWSERS_JSON))
   matcher = BrowserslistUseragent::Match.new(@browsers, request.user_agent)
-  matcher.browser? && !matcher.version?(allow_higher: true)
+  matcher.browser? && matcher.version?(allow_higher: true)
 end
 ```
 
 ### 4. Use helper in template
 
-Put some text for user with outdated browser in `app/views/layout` and add this check in application layout:
+Put a warning message for users with an unsupported browser in `app/views/layouts/_unsupported_browser_warning` and add this check in application layout:
 
 ```haml
 body
-  - if outdated_browser?
-    render 'outdated_browser_warning'
+  - if !supported_browser?
+    render 'layouts/unsupported_browser_warning'
 ```
 
 ### Separated projects
