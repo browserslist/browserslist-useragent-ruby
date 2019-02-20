@@ -17,9 +17,9 @@ module BrowserslistUseragent
       family = agent.family
       version = VersionNormalizer.new(agent.version.to_s).call
 
-      # Case A: For Safari, Chrome and others browsers
+      # Case A: For Safari, Chrome and others browsers on iOS
       # that report as Safari after stripping tags
-      family = 'iOS' if agent.family.include?('Safari')
+      family = 'iOS' if agent.family.include?('Safari') && agent.os.family == 'iOS'
 
       # Case B: The browser on iOS didn't report as safari,
       # so we use the iOS version as a proxy to the browser
