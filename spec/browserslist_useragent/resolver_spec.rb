@@ -36,6 +36,14 @@ RSpec.describe BrowserslistUseragent::Resolver do
       ).to eq(family: 'iOS', version: '8.3.0')
     end
 
+    it 'desktop safari on OS X' do
+      expect(
+        resolve_user_agent(
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.1.0 Safari/603.1.30'
+        )
+      ).to eq(family: 'Safari', version: '10.1.0')
+    end
+
     it 'resolves IE/Edge properly' do
       # explorer
       expect(
