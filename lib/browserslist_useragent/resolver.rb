@@ -12,7 +12,7 @@ module BrowserslistUseragent
     end
 
     def call
-      agent = UserAgentParser.parse(user_agent_string)
+      agent = self.class.user_agent_parser.parse(user_agent_string)
 
       family = agent.family
       version = VersionNormalizer.new(agent.version.to_s).call
@@ -47,6 +47,10 @@ module BrowserslistUseragent
       family = 'UCAndroid' if agent.family == 'UC Browser'
 
       { family: family, version: version }
+    end
+
+    def self.user_agent_parser
+      @parser ||= UserAgentParser::Parser.new
     end
   end
 end
