@@ -50,7 +50,7 @@ module BrowserslistUseragent
     end
 
     def self.user_agent_parser
-      @parser ||= UserAgentParser::Parser.new
+      @user_agent_parser ||= UserAgentParser::Parser.new
     end
   end
 end
