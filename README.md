@@ -19,7 +19,7 @@ Run in webpack directory to install `browserslist` npm package:
 npm install --save-dev browserslist
 ```
 
-Put this lines of code to webpack config to generate `browsers.json` during build step:
+Add the following lines to your webpack config to generate the `browsers.json`file during build step:
 
 ```javascript
 const browserslist = require('browserslist')
@@ -28,7 +28,9 @@ const fs = require('fs')
 fs.writeFileSync('./browsers.json', JSON.stringify(browserslist()))
 ```
 
-Put `browsers.js` file to `.gitignore`.
+In a Rails/Webpacker environment add the above lines to the top of your `app/config/webpack/environment.js` file.
+
+Add `browsers.json` file to `.gitignore`.
 
 ### 2. Install gem
 
