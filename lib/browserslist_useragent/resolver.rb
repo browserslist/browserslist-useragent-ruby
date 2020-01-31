@@ -39,7 +39,7 @@ module BrowserslistUseragent
       # In this case, we proxy to the desktop version
       # @see https://github.com/Fyrd/caniuse/issues/3518
       family = 'Chrome' if agent.family.include?('Chrome Mobile')
-
+      family = 'Chrome' if agent.family == 'HeadlessChrome'
       family = 'Firefox' if agent.family == 'Firefox Mobile'
       family = 'Explorer' if agent.family == 'IE'
       family = 'ExplorerMobile' if agent.family == 'IE Mobile'
