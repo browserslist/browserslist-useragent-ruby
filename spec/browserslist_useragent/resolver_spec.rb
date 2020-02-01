@@ -75,6 +75,13 @@ RSpec.describe BrowserslistUseragent::Resolver do
         )
       ).to eq(family: 'Chrome', version: '41.0.228')
 
+      # headless
+      expect(
+        resolve_user_agent(
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/60.0.3112.50 Safari/537.36'
+        )
+      ).to eq(family: 'Chrome', version: '60.0.3112')
+
       # android
       expect(
         resolve_user_agent(
