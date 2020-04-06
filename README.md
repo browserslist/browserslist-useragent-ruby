@@ -94,7 +94,7 @@ end
 
 It provides 2 methods:
  - `version?(allow_higher: false)` - determines matching browser and it's version
- - `browser?` - determines matching only borwser family
+ - `browser?` - determines matching only browser family
 
 ```ruby
 require 'browserslist_useragent'
