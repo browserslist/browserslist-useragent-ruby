@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Find if a given user agent string satisfies a browserslist query.'
   spec.description   = 'Provides easy way to match browser user agent string with specified set of rules (from browserslist tool)'
-  spec.homepage      = 'https://github.com/browserslist/browserlist-useragent-ruby'
+  spec.homepage      = 'https://github.com/browserslist/browserslist-useragent-ruby'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
