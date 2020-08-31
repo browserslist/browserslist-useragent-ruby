@@ -119,5 +119,13 @@ RSpec.describe BrowserslistUseragent::Resolver do
         )
       ).to eq(family: 'Firefox', version: '44.0.0')
     end
+
+    it 'resolves opera mobile properly' do
+      expect(
+        resolve_user_agent(
+          'Mozilla/5.0 (Linux; Android 10; LYA-L09) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Mobile Safari/537.36 OPR/59.1.2926.54067'
+        )
+      ).to eq(family: 'OperaMobile', version: '59.1.2926')
+    end
   end
 end
