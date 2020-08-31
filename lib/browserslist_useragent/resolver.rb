@@ -41,6 +41,7 @@ module BrowserslistUseragent
       family = 'Chrome' if agent.family.include?('Chrome Mobile')
       family = 'Chrome' if agent.family == 'HeadlessChrome'
       family = 'Firefox' if agent.family == 'Firefox Mobile'
+      family = 'Edge' if agent.family == 'Edge Mobile'
       family = 'Explorer' if agent.family == 'IE'
       family = 'ExplorerMobile' if agent.family == 'IE Mobile'
       family = 'QQAndroid' if agent.family == 'QQ Browser Mobile'
