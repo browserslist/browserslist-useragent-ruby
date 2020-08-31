@@ -59,6 +59,13 @@ RSpec.describe BrowserslistUseragent::Resolver do
         )
       ).to eq(family: 'ExplorerMobile', version: '10.0.0')
 
+      # edge mobile
+      expect(
+        resolve_user_agent(
+          'Mozilla/5.0 (Linux; Android 10; LYA-L09) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.116 Mobile Safari/537.36 EdgA/45.07.4.5054'
+        )
+      ).to eq(family: 'Edge', version: '45.07.4')
+
       # edge
       expect(
         resolve_user_agent(
