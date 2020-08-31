@@ -16,6 +16,7 @@ module BrowserslistUseragent
       op_mini: 'OperaMini',
       op_mob: 'OperaMobile',
       and_qq: 'QQAndroid',
+      samsung: 'SamsungInternet',
       and_uc: 'UCAndroid'
     }.freeze
 

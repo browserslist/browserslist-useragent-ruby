@@ -94,6 +94,12 @@ RSpec.describe BrowserslistUseragent::QueryNormalizer do
 
         it { expect(subject).to include(family: 'Chrome') }
       end
+
+      context 'when browser is samsung' do
+        let(:query) { 'samsung 11.1-11.2' }
+
+        it { expect(subject).to include(family: 'SamsungInternet') }
+      end
     end
 
     describe 'version' do
