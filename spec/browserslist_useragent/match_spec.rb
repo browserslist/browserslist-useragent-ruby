@@ -6,7 +6,7 @@ RSpec.describe BrowserslistUseragent::Match do
     [
       'firefox 59', 'firefox 58', 'chrome 64', 'chrome 65',
       'ie 10', 'and_uc 11.8', 'android 4.4.3-4.4.4',
-      'ios_saf 11.3', 'ios_saf 11.0-11.2'
+      'ios_saf 11.3', 'ios_saf 11.0-11.2', 'op_mob 46'
     ]
   end
 
@@ -27,6 +27,12 @@ RSpec.describe BrowserslistUseragent::Match do
 
     context 'when family is Chrome' do
       let(:user_agent) { { family: 'Chrome' } }
+
+      it { expect(matcher).to be_browser }
+    end
+
+    context 'when family is OperaMobile' do
+      let(:user_agent) { { family: 'OperaMobile' } }
 
       it { expect(matcher).to be_browser }
     end

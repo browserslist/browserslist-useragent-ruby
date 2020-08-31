@@ -43,9 +43,9 @@ module BrowserslistUseragent
       family = 'Firefox' if agent.family == 'Firefox Mobile'
       family = 'Explorer' if agent.family == 'IE'
       family = 'ExplorerMobile' if agent.family == 'IE Mobile'
+      family = 'OperaMobile' if agent.family == 'Opera Mobile'
       family = 'QQAndroid' if agent.family == 'QQ Browser Mobile'
       family = 'UCAndroid' if agent.family == 'UC Browser'
-      family = 'OperaMobile' if agent.family == 'Opera Mobile'
 
       { family: family, version: version }
     end
