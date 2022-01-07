@@ -1,4 +1,5 @@
 # browserslist_useragent gem
+
 [![Gem Version](https://badge.fury.io/rb/browserslist_useragent.svg)](https://badge.fury.io/rb/browserslist_useragent)
 [![Build Status](https://travis-ci.org/browserslist/browserslist-useragent-ruby.svg?branch=master)](https://travis-ci.org/browserslist/browserslist-useragent-ruby)
 
@@ -22,10 +23,10 @@ npm install --save-dev browserslist
 Add the following lines to your webpack config to generate the `browsers.json`file during build step:
 
 ```javascript
-const browserslist = require('browserslist')
-const fs = require('fs')
+const browserslist = require("browserslist");
+const fs = require("fs");
 
-fs.writeFileSync('./browsers.json', JSON.stringify(browserslist()))
+fs.writeFileSync("./browsers.json", JSON.stringify(browserslist()));
 ```
 
 In a Rails/Webpacker environment add the above lines to the top of your `app/config/webpack/environment.js` file.
@@ -70,9 +71,9 @@ If you have separated projects for Ruby backend and Node.js frontend, you will p
 
 ```javascript
 fs.writeFileSync(
-  path.join(__dirname, 'public', 'browsers.json'),
-  JSON.stringify(browserslist(undefined, { path: path.join(__dirname, '..') }))
-)
+  path.join(__dirname, "public", "browsers.json"),
+  JSON.stringify(browserslist(undefined, { path: path.join(__dirname, "..") }))
+);
 ```
 
 Gets `browserslist.json` over HTTP (with caching) once (per web application instance) and use it to match user agent for every request:
@@ -90,11 +91,13 @@ end
 ```
 
 ## API
+
 `BrowserslistUseragent::Match` is the main class performing matching user agent string to browserslist.
 
 It provides 2 methods:
- - `version?(allow_higher: false)` - determines matching browser and it's version
- - `browser?` - determines matching only browser family
+
+- `version?(allow_higher: false)` - determines matching browser and it's version
+- `browser?` - determines matching only browser family
 
 ```ruby
 require 'browserslist_useragent'
@@ -117,16 +120,16 @@ matcher.version? # return false
 ## Supported browsers
 
 Chrome, Firefox, Safari, IE, Edge
- 
+
 PRs to add more _browserslist supported_ browsers are welcome 👋
 
 ## Notes
 
-* All browsers on iOS (Chrome, Firefox etc) use Safari's WebKit as the underlying engine, and hence will be resolved to Safari. Since `browserslist` is usually used for
+- All browsers on iOS (Chrome, Firefox etc) use Safari's WebKit as the underlying engine, and hence will be resolved to Safari. Since `browserslist` is usually used for
   transpiling / autoprefixing for browsers, this behaviour is what's intended in most cases, but might surprise you otherwise.
-* Right now, Chrome for Android and Firefox for Android are resolved to their desktop equivalents. The `caniuse` database does not currently store historical data for these browsers separately (except the last version) See [#156](https://github.com/ai/browserslist/issues/156)
+- Right now, Chrome for Android and Firefox for Android are resolved to their desktop equivalents. The `caniuse` database does not currently store historical data for these browsers separately (except the last version) See [#156](https://github.com/ai/browserslist/issues/156)
 
-## Development (with Docker))))
+## Development (with Docker)
 
 After checking out the repo, run:
 

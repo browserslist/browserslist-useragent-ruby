@@ -3,13 +3,13 @@ AllCops:
     - '*.gemspec'
   DisplayCopNames: true
   StyleGuideCopsOnly: false
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 110
   Exclude:
     - 'spec/**/*'
-      
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'

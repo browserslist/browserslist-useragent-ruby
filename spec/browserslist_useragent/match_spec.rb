@@ -6,7 +6,8 @@ RSpec.describe BrowserslistUseragent::Match do
     [
       'firefox 59', 'firefox 58', 'chrome 64', 'chrome 65',
       'ie 10', 'and_uc 11.8', 'android 4.4.3-4.4.4',
-      'ios_saf 11.3', 'ios_saf 11.0-11.2', 'op_mob 46', 'samsung 11.1-11.2', 'samsung 12.0'
+      'ios_saf 11.3', 'ios_saf 11.0-11.2', 'op_mob 46', 'samsung 11.1-11.2', 'samsung 12.0',
+      'safari TP', 'op_mini all', 'opera'
     ]
   end
 
@@ -54,7 +55,25 @@ RSpec.describe BrowserslistUseragent::Match do
     context 'when version is nil' do
       let(:user_agent) { { family: 'Chrome', version: '' } }
 
-      it { expect(matcher.version?).to be_falsey }
+      it { expect(matcher).not_to be_version }
+    end
+
+    context 'when rule has single version TP' do
+      let(:user_agent) { { family: 'Safari', version: '5.0.0' } }
+
+      it { expect(matcher).not_to be_version }
+    end
+
+    context 'when rule has single version all' do
+      let(:user_agent) { { family: 'OperaMini', version: '5.0.0' } }
+
+      it { expect(matcher).to be_version }
+    end
+
+    context 'when rule has single version nil' do
+      let(:user_agent) { { family: 'Opera', version: '5.0.0' } }
+
+      it { expect(matcher).to be_version }
     end
 
     context 'when rule has single version with major only' do
@@ -83,7 +102,7 @@ RSpec.describe BrowserslistUseragent::Match do
       end
     end
 
-    context 'when rule has signle version with minor' do
+    context 'when rule has single version with minor' do
       context 'when version fully matches with version in rule' do
         let(:user_agent) { { family: 'iOS', version: '11.3.0' } }
 
@@ -109,7 +128,7 @@ RSpec.describe BrowserslistUseragent::Match do
       end
     end
 
-    context 'when rule has signle version with patch' do
+    context 'when rule has single version with patch' do
       context 'when version fully matches with version in rule' do
         let(:user_agent) { { family: 'android', version: '4.4.3' } }
 

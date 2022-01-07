@@ -3,7 +3,7 @@
 require 'semantic'
 
 module BrowserslistUseragent
-  # Checks matching of browserslist queies array to the user agent string
+  # Checks matching of browserslist queries array to the user agent string
   class Match
     attr_reader :queries, :user_agent_string
 
@@ -40,6 +40,11 @@ module BrowserslistUseragent
 
     def match_semantic_version(semantic, allow_higher:)
       queries[user_agent[:family].downcase].any? do |version|
+        # Deal with "all" or nil version rule e.g. op_mini all (all semantic are match)
+        return true if version == "all" || version.nil?
+        # Deal with "TP" version rule e.g. Safari TP _ note there is no match if client is indeed TP
+        return false if version == "TP"
+
         if allow_higher
           match_higher_version?(semantic, version)
         else
