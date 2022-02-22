@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    browserslist_useragent (0.1.3)
+    browserslist_useragent (0.1.4)
       semantic
       user_agent_parser
 
