@@ -17,9 +17,9 @@ module BrowserslistUseragent
 
       [
         agent_version.major,
-        agent_version.minor || 0,
-        agent_version.patch || 0
-      ].join('.')
+        agent_version.minor,
+        agent_version.patch
+      ].map { |x| x.nil? ? 0 : x.to_i.to_s }.join('.')
     end
   end
 end

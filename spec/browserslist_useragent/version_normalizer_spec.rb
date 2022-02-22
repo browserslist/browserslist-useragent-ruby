@@ -27,5 +27,17 @@ RSpec.describe BrowserslistUseragent::VersionNormalizer do
 
       it { expect(subject).to eq '1.2.3' }
     end
+
+    context 'when version is slightly invalid' do
+      let(:version) { '11.00.1' }
+
+      it { expect(subject).to eq '11.0.1' }
+    end
+
+    context 'when version is slightly invalid' do
+      let(:version) { '11.01.1' }
+
+      it { expect(subject).to eq '11.1.1' }
+    end
   end
 end
