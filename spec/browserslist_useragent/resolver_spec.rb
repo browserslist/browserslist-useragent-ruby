@@ -7,7 +7,7 @@ RSpec.describe BrowserslistUseragent::Resolver do
     end
 
     it 'resolves all browsers in iOS to safari with correct platform version' do
-      # chome on iOS
+      # chrome on iOS
       expect(
         resolve_user_agent(
           'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_0 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) CriOS/60.0.0.0 Mobile/14E5239e Safari/602.1'
@@ -75,6 +75,13 @@ RSpec.describe BrowserslistUseragent::Resolver do
         )
       ).to eq(family: 'Chrome', version: '41.0.228')
 
+      # chrome with a zero-padded version
+      expect(
+        resolve_user_agent(
+          'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/535.14.61 (KHTML, like Gecko) Chrome/53.5.0289.5916 Safari/534.43'
+        )
+      ).to eq(family: 'Chrome', version: '53.5.289')
+
       # headless
       expect(
         resolve_user_agent(
@@ -118,6 +125,14 @@ RSpec.describe BrowserslistUseragent::Resolver do
           'Mozilla/5.0 (Android 7.0.0; Build/Unknown; Mobile; rv:44.0.0) Gecko/44.0.0 Firefox/44.0.0'
         )
       ).to eq(family: 'Firefox', version: '44.0.0')
+    end
+
+    it 'resolves opera properly' do
+      expect(
+        resolve_user_agent(
+          'Opera/9.80 (Windows NT 6.1; U; es-ES) Presto/2.9.181 Version/12.00'
+        )
+      ).to eq(family: 'Opera', version: '12.0.0')
     end
   end
 end

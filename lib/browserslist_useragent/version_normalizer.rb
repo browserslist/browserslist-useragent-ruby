@@ -16,9 +16,9 @@ module BrowserslistUseragent
       return nil if agent_version.major.nil?
 
       [
-        agent_version.major,
-        agent_version.minor || 0,
-        agent_version.patch || 0
+        agent_version.major.to_i,
+        agent_version.minor.to_i || 0,
+        agent_version.patch.to_i || 0
       ].join('.')
     end
   end
